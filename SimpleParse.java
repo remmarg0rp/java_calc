@@ -37,7 +37,7 @@ class SimpleParse {
         int _prevP = 0; // временная переменная
         String _literal = "" ;
 /**
- * Основной цикл разюора строки по шаблонам
+ * Основной цикл разюбора строки по шаблонам
  * */
         for ( int i = 0 ; i < inp.length(); i++ ){
             // проверяем на символы пропуска (!) по хорошему нужен отдкльный паттерн
@@ -54,14 +54,16 @@ class SimpleParse {
 
 
                         // обработка "-" минуса (может встречаться как в операциях так и в арабских
-                        if (    sym.equals("-") && p == pARAB &&
-                                ( inp.substring( i+1, i+2 ).equals(" ") ||
-                                  inp.substring( i+1, i+2 ).equals("\t")||
-                                  _indPattern[ p ] != 0) ) {
+                        if (    sym.equals("-") && p == pARAB) {
+                                if ( i+2 <= inp.length() &&
+                                        ( inp.substring( i+1, i+2 ).equals(" ") ||
+                                        inp.substring( i+1, i+2 ).equals("\t")||
+                                        _indPattern[ p ] != 0) ) {
 
                                 found = false;
                                 break;
                             }
+                        }
 
                         //записываем ранее опреленную последовательность и переходим к следующему
                         if (_prevP != p /* && _indPattern[_prevP] != 0*/) {
